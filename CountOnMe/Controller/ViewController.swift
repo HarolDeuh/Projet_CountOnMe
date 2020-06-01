@@ -12,23 +12,30 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
+    
+    // variable pour faire un tableau de string des elmeents du textfield qu'on separe en plusieurs elements
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
     
     // Error check computed variables
+    
+    // BOOL pour verifier que le dernier element du tableau est différent d'un signe d'operation
     var expressionIsCorrect: Bool {
         return elements.last != "+" && elements.last != "-"
     }
     
+    // BOOL qui verifie qu'il y a assez d'elements dans mon tableau pour faire le calcul. Il en faut au moins 3 (a + b)
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
     
+    // BOOL qui verifie qu'on peut rajouter un operateurs. On ne peut pas le faire si le dernier elements de mon tableau en est deja
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-"
     }
     
+    // BOOL qui verifie si le nouvel element que je rajoute dans mon tableau est bien le signe =
     var expressionHaveResult: Bool {
         return textView.text.firstIndex(of: "=") != nil
     }
